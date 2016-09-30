@@ -2,10 +2,14 @@
 
 #include "TestingGrounds.h"
 #include "ChooseNextWaypoint.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent & OwnerComp, uint8 * NodeMemory)
 {
-	UE_LOG(LogTemp, Warning, TEXT("DONKEY"));
+	UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
+	int32 Index = BlackboardComponent->GetValueAsInt(IndexKey.SelectedKeyName); // Finds name of index key in Behavior Tree
 
-	return EBTNodeResult::Type();
+	UE_LOG(LogTemp, Warning, TEXT("Waypoint Index: %i"), Index);
+
+	return EBTNodeResult::Succeeded;
 }
